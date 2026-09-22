@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스크립트 데이터 타입</title>
+</head>
+<body>  
+    <script>
+        // script 사이에 스크립트 코드 작성 head 또는 body 두 영역 중 하나에 입력한다.
+        // 변수 선언시 사용하는 키워드: var, let , const
+        // var 키워드: 중복 선언 가능, 재할당 가능
+        // EX6 버전부터는 var을 사용하지 않는다.
+
+        // 자바 스크립트는 데이터 타입이 존재하지만 선언하지는 않는다.
+        var title = 'book';
+        console.log(title);
+
+        var title = 'movie';
+        console.log(title);
+
+        title = 'music';
+        console.log(title);
+
+        // let: 재선언은 안되고, 재할당만 가능하다.
+        let title_01 = 'book02';
+        console.log(title_01);
+
+        title_01 ="html";
+        console.log(title_01);
+
+        // const :재선언 불가, 재할당 불가
+        const title_02 ='java';
+        console.log(title_02);
+
+        // title_02 ='python';
+        // console.log(title_02);
+
+        let x=5 , y=7;
+        console.log(typeof x)
+        x='java';
+        console.log(typeof x)
+        let big =x>y?x:y;
+        console.log(big);
+
+        // 자바 스크립트는 null도 값이다.
+        let user = null; //user 변수는 현재 비어있다.
+        // let user01 = NULL; //NULL,Null은 사용 불가, 뭔지 몰라 오류출력됨
+        let user02 = 'Null'; // NULL,Null은 텍스트로 인식됨 
+        let Null ='안녕'; // Null은 여기서 변수 이름이다.
+        console.log(user);
+        console.log(user02);
+        console.log(Null);
+        let a=1;
+        let b='k';
+        console.log(a+b); // 1k 출력, String 데이터는 나열됨
+        console.log(a*b); // NaN(Not a Number) 숫자가 아니라 곱할 수 없다는 오류 출력
+        console.log('a는 '+ a+', b는 '+b+'이다');
+        // 자바스크립트에서 변수와 문자를 구분하여 자연스럽게 출력하는 방법
+        // `(백틱)을 사용한다.
+        // `a는 ${a}이고, b는 ${b}이다.`
+        console.log(`a는 ${a}이고, b는 ${b}이다.`);
+    </script>
+</body>
+</html>

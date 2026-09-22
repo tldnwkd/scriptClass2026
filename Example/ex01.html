@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 연습문제 기초</title>
+</head>
+<body>
+    <!-- problem1()스크립트에서 작성할 함수이름이다.
+         버튼을 클릭하는 사건이 일어나면 problem1()함수를 호출하여
+         실행하라 라는 의미이다.
+         단, 함수는 스크립트 영역에만 작성할 수 있다. -->
+    <button onclick="problem1()">문제 1: 변수와 상수 출력</button>
+    <p id="p1"></p>
+    <hr>
+    <button onclick="problem2()">문제 2: 두 수 더하기</button>
+    <p id="p2"></p>
+    <hr>
+    <input id="numInput" type="number" placeholder="숫자 입력" />
+    <button onclick="showVariable()">값 확인</button>
+    <p id="output1"></p>
+    <script>
+        let print01 = document.getElementById('p1');
+        let print02 = document.getElementById('p2');
+        // let value01 = document.getElementById('numInput');
+        let print03 = document.getElementById('output1');
+        function problem1(){
+            let a ='홍길동';
+            let b =20;
+            // DOM을 이용한다. 자바스크립트가 태그에 접근하도록 작성하는 방법이다.
+            // p1이라는 id를 가진 요소(태그) 안쪽에 문자로 이름: 홍길동,나이: 20 로 출력해주세요
+            print01.innerText=`이름: ${a},나이: ${b}`;
+        }
+
+        function problem2(){
+            let a = 10;
+            let b = 5;
+            let sum = a+b;
+            print02.innerText=`합계: ${sum}`
+        }
+        function showVariable(){
+            let num = Number(document.getElementById('numInput').value);
+            // console.log(num);
+            print03.innerText=`변수 num의 값:${num}`;
+        }
+    </script>
+</body>
+</html>
