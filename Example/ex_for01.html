@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for 연습문제</title>
+</head>
+<body>
+    <!-- 문제 : input 태그에서 입력한 숫자에 해당하는
+                합계를 구하여 p태그에 출력하시오.
+                단, 무조건 1부터 합계를 구하시오.
+                for 반복문 이용
+     -->
+    <h2>1부터 input값 까지의 합계</h2>
+    숫자 : <input type="number" id="value">
+    <button onclick="sum()">합계</button>
+    <p id="output"></p>
+
+    <script>
+        let value =document.getElementById('value');
+        let output =document.getElementById('output');
+        
+        function sum(){
+            let number = Number(value.value);
+            let result = 0;
+            for(let i=1; i<=number; i++){
+                result += i;
+            }
+            output.innerText = `합계 : ${result}`;
+        }
+    </script>
+</body>
+</html>

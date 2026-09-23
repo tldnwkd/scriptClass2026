@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>spinButton</title>
+    <style>
+        .container{
+            border: 1px solid white;
+            display: flex;
+            width: 120px;
+            height: 40px;
+            margin: 50px;
+            border-radius: 20px;
+            justify-content: space-evenly;
+            align-items: center;
+            background-color: rgb(241, 240, 240);
+            font-weight: bold;
+        }
+        button{
+            border: none;
+            background-color: rgb(241, 240, 240);
+            border-radius: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button onclick="minus()">-</button><span id="number">1</span><button onclick="plus()">+</button>
+    </div>
+
+    <script>
+        let number = document.getElementById('number');
+        let count =1;
+        console.log(typeof number.innerText);
+        // let result = Number(number.innerText);
+        function minus(){
+            if(count > 1){
+                count--;
+                number.innerText = count;
+            }else{
+                alert("최소 수량은 1개입니다.")
+            }      
+        }
+        function plus(){
+            if(count < 10){
+                count++;
+                number.innerText = count;
+            }else{
+                alert("최대 수량은 10개입니다.")
+            }
+        }
+    </script>
+
+</body>
+</html>

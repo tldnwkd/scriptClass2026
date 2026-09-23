@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쇼핑몰</title>
+    <style>
+        /* 기본 상자 스타일링 */
+        .order-container {
+            width: 350px;
+            padding: 20px;
+            border: 1px solid #767676;
+            font-family: sans-serif;
+            box-sizing: border-box;
+            margin: 50px;
+        }
+
+        /* 제목 스타일 */
+        .order-container h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* 상품 단가 스타일 */
+        .order-container h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #222;
+        }
+
+        /* 수량 입력 행 정렬 */
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        /* 수량 입력창 */
+        .input-group input[type="number"] {
+            width: 70px;
+            height: 32px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            text-align: center;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        /* 금액 계산 버튼 (초록색 둥근 버튼) */
+        .input-group button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 7px 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .input-group button:hover {
+            background-color: #45a049;
+        }
+
+        /* 결과/안내 메시지 상자 (연회색 배경) */
+        .result-box {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 12px 15px;
+            margin: 0;
+            font-size: 13px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="order-container">
+        <h2>상품 주문하기</h2>
+        <h4>상품 단가: 15,000원</h4>
+        <div class="input-group">
+            <label for="count">수량:</label>
+            <input type="number" id="count">
+            <button onclick="calPrice()">금액 계산</button>
+        </div>
+        <p id="output" class="result-box">수량을 입력하고 계산 버튼을 누르세요.</p>
+    </div>
+    <script>
+        let count = document.getElementById('count');
+        let output =document.getElementById('output');
+        function calPrice(){
+            let price = 15000;
+            let value = count.value;
+            let totalPrice1 = price*value;
+            let totalPrice2 = totalPrice1+3000;
+            switch(true){
+                case value>=1 :
+                if(totalPrice1>=50000){
+                    output.innerText =`총 결제 금액 : ${totalPrice1.toLocaleString()}원 
+                    무료배송 대상이며, 사은품이 함께 증정됩니다!`
+                }else{
+                    output.innerText = `총 결제 금액 : ${totalPrice2.toLocaleString()}원
+                    (5만원 미만 구매시 배송비 3,000원이 추가됩니다.)`
+                }
+                break;
+                case value<1 : 
+                alert("수량을 1개 이상 입력해 주세요."); 
+                break;
+            }           
+        }
+    </script>
+</body>
+</html>
