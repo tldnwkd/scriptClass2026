@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쇼핑 몰 상품 가격 비교</title>
+    <style>
+        table{
+            list-style: none;
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+        tr td,
+        tr th{
+            border: 1px solid black;
+            padding: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .pass{
+            color: red;
+        }
+        .fail{
+            color: blue;
+        }
+        
+    </style>
+</head>
+<body>
+    <h2>상품 가격 비교</h2>
+    <button onclick="Proclick()">상품 출력</button>
+    <div id="output"></div>
+    <!-- <table>
+        <tr>
+            <th>상품</th><th>가격</th><th>등급</th>
+        </tr>
+    </table> -->
+    <script>
+        
+        function Proclick(){
+            let output =document.getElementById('output');
+            let product = ['노트북','마우스','모니터','키보드'];
+            let price = [120000,30000,80000,40000];
+            let result = `<table><tr><th>상품</th><th>가격</th><th>등급</th></tr>`;
+            // let result = '';
+            for(let i=0; i<product.length; i++){
+                let status = price[i]>=50000 ? '고가':'저가';
+                let className = price[i]>=50000 ? 'pass':'fail';
+                result += `<tr><td>${product[i]}</td><td>${price[i]}원</td><td><span class='${className}'>${status}</span><br/></td></tr>`
+            }
+            output.innerHTML= result + `</table>`;
+        }
+    </script>
+</body>
+</html>

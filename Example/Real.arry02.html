@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>책 재고 현홍 확인</title>
+    <style>
+        div{
+            font-size: 20px;
+            font-weight:600;
+        }
+        .fail{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2>책 재고 현황</h2>
+    <button onclick="check()">재고확인</button>
+    <div id="output"></div>
+
+    <script>
+        let book = ['자바스크립트 입문','HTML & CSS','파이썬 기초','데이터 분석'];
+        let stock = [10,3,7,2];
+        let output = document.getElementById('output');
+        function check(){
+            let result = '';
+            for(let i=0; i<book.length; i++){
+                let status = stock[i] >= 5 ? '재고충분' : '재고부족'; 
+                let className = stock[i] >= 5 ? 'pass' : 'fail'; 
+                result += `${book[i]} : ${stock[i]}권 - <span class='${className}'>${status}</span><br/>`;
+            }
+            output.innerHTML = result;
+        }
+
+    </script>
+</body>
+</html>

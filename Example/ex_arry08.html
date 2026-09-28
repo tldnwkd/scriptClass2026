@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열 심화문제</title>
+</head>
+<body>
+    <h1>배열+for문+if문 문제</h1>
+    1번 점수 배열 입력(예:95,67,80,55,100,72): <input type="text" id="text"><button onclick="outfoot()">결과확인</button>
+    <p id="rank"></p>
+    <script>
+        let text = document.getElementById('text');
+        let rank = document.getElementById('rank'); 
+        function outfoot(){
+            let text01 = text.value;
+            let scores= text01.split(',');
+            let result ='';
+
+            for(let i=0; i<scores.length; i++){
+                if(scores[i]>=90){
+                    result += scores[i]+'점: A,';
+                }else if(scores[i]>=80){
+                    result += scores[i]+'점: B,';
+                }else if(scores[i]>=70){
+                    result += scores[i]+'점: C,';
+                }else{
+                    result += scores[i]+'점: F,';
+                }
+            }
+            // 객체 맨뒤 하나만 제거 후 출력
+            rank.innerText=result.slice(0,-1);
+        }
+        
+    </script>
+</body>
+</html>

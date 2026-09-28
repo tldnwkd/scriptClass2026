@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실시간 재고 관리</title>
+    <style>
+        button{
+            margin: 5px;
+            padding: 3px 10px;
+        }
+        div{
+            display: f;
+        }
+        span{
+            color: green;
+            font-size: 25px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>실시간 재고 관리</h2>
+    <div id="output"></div>
+
+    
+       
+
+    <script>
+        let output =document.getElementById('output');
+        let index =[]; 
+        let indexnum=0;
+        let product=['노트북','마우스','키보드'];
+        let stock =[3,3,2];
+
+        function render(){
+            let result ='';
+            let count =0;        
+            for(let i=0; i<product.length; i++){
+                result += `${product[i]} : ${stock[i]}개<button onclick="minus()">-</button><button onclick="plus()">+</button><br/>`;
+                count += stock[i];
+                indexnum=i;
+            }
+            output.innerHTML = result+`<span>총 재고: ${count}개</span>`;
+        function minus(){
+            
+            render()
+        }
+        function plus(){
+
+        }
+        }
+        render();
+        
+    </script>
+</body>
+</html>

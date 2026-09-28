@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학생 성적표 출력</title>
+    <style>
+        .fail{
+            color: red;
+        }
+        .pass{
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>학생 성적표</h1>
+    <button onclick="output()">성적표 출력</button>
+    <div id="output01"></div>
+
+    <script>
+        let output01 = document.getElementById('output01');
+
+        function output(){
+            let name=['철수','영희','민지','수지','준호'];
+            let score=[85,58,92,77,61];
+            let result ='';
+            for(let i =0; i<name.length; i++){
+                let status = score[i]>= 60? '합격':'불합격';
+                // 클래스 이름 지정하는 코드
+                let className = score[i]>= 60? 'pass':'fail';
+                result += `${name[i]} : ${score[i]}점 - <span class='${className}'>${status}</span><br/>`;
+            }
+            output01.innerHTML = result;
+        }
+    </script>
+</body>
+</html>

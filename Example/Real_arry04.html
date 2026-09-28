@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>간단한 투표 집계</title>
+    <style>
+        p{
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .pass{
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>투표 결과</h1>
+    <button onclick="votecount()">투표 집계</button>
+    <p id="output"></p>
+    <script>
+        let output =document.getElementById('output');
+
+        function votecount(){
+            let name =['철수','영희','민수'];
+            let count = [120,150,90];
+            let max = 0;
+            let result ='';
+            for(let i=0; i<name.length; i++){
+                if(max<count[i]){
+                    max=count[i];
+                }
+            }
+            for(let i=0; i<name.length; i++){
+                let status = count[i]==max ? '1등': "";
+                let className = count[i]==max ? 'pass': 'fail';
+                result += `${name[i]} : ${count[i]}표 <span class='${className}'>${status}</span><br/>`;
+            }
+            
+            output.innerHTML = result;
+        }
+    </script>
+</body>
+</html>

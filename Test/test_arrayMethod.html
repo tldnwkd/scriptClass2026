@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열 Method</title>
+</head>
+<body>
+    <script>
+        // 자바스크립트의 Array(배열)의 각종 Method
+        let ranking=['Jason','Alice','Candy','Chris','Tom'];
+        let arrTotal=['korea',90,'2026-09-28'];
+
+        // 1. pop() : 맨 마지막 요소 반환 및 삭제
+        console.log(`pop()하기 전 ranking 요소 : ${ranking}`);
+        let poped = ranking.pop();
+        console.log(`pop()한 요소 : ${poped}`);
+        console.log(`pop()한 후 ranking 요소 : ${ranking}`);
+
+        // 2. push(new data) : 맨 마지막에 새로운 데이터 추가
+        ranking.push('David');
+        console.log(`push()한 후 ranking 요소 : ${ranking}`);
+        
+        // 3. shift() : 맨 앞 요소를 삭제하고 반환한다.
+        let shifted = ranking.shift();
+        console.log(`shift()한 요소 : ${shifted}`);
+        console.log(`shift()한 후 ranking 요소 : ${ranking}`);
+
+        // 4. unshift() : 배열의 맨 앞에 인덱스에 새로운 데이터를 추가합니다.
+        ranking.unshift('Emma');
+        console.log(`unshift()한 후 ranking 요소 : ${ranking}`);
+
+        // 새로운 테스트를 위해 재할당한다.
+        ranking=['Jason','Alice','Candy','Chris','Tom'];
+        // 5. join(연결할 문자) : 요소와 요소 사이를 연결할 문자로 연결 후 문자열로 반환
+        let joinString = ranking.join('-');
+        console.log(`join()한 후 ranking 요소 : ${joinString}`);
+        
+        // 6. reverse() : 배열 객체의 데이터의 순서를 바꾼 새로운 배열을 반환합니다.
+        ranking.reverse();
+        console.log(`reverse()한 후 ranking 요소 : ${ranking}`);
+
+        // 7.sort() : 배열 객체 데이터들을 기본 오름차순으로 정렬합니다.
+        ranking.sort();
+        console.log(`ranking 요소를 sort() 한 후 : ${ranking}`);       
+        arrTotal.sort();
+        console.log(`arrTotal 요소를 sort() 한 후 : ${arrTotal}`);
+
+        // 내림차순 sort((a,b) => b-a); ->단,배열 요소가 숫자일때만 가능
+        let numbers = [5,1,8,7,2,9];
+        numbers.sort((a,b) => b-a);
+        console.log(`ranking 요소를 sort((a,b) => b-a) 한 후 : ${numbers}`);
+
+        // 8. slice(start Index, end Index)인수로 넘긴 인덱스 구간만큼 잘라서 
+        // 새로운 배열 객체를 만들어 반환합니다.
+        // slice(1,3) : 인덱스 1부터 인덱스 2까지만 정의된다.
+        // (start Index부터 시작해서 end Index전까지만)
+
+        let sliced = ranking.slice(1,3);
+        console.log(`ranking 요소를 slice(1,3) 한 후 : ${sliced}`)
+        console.log(`ranking 요소를 slice(1,3) 한 후 : ${ranking}`)
+
+        // 9.splice(start Index, 삭제할 갯수 ,data) 
+        // :배열 객체의 인덱스의 지정한 데이터를 삭제하고 새로운 데이터를 삽입합니다.
+        // data는 여러개 나열해서 추가 가능
+        let spliced = ranking.splice(1,2,'Jackson','Ryan');
+        console.log(`ranking 요소를 splice(1,3) 한 후 : ${spliced}`)
+        console.log(`ranking 요소를 splice(1,3) 한 후 : ${ranking}`)
+
+        // 10.concat() :  2개의 배열객체를 하나로 합친 배열 객체를 반환합니다.
+        let newRanking = ranking.concat('Sam','John');
+        console.log(`ranking 요소를 concat('Sam','John') 한 후 : ${newRanking}`)
+        console.log(`ranking 요소를 concat('Sam','John') 한 후 : ${ranking}`)
+
+        // 11.indexOf() : 주어진 값과 일치하는 값이 있는 배열요소의 첫 인덱스를 찾는다. 없으면 -1 반환
+        ranking=['Jason','Alice','Candy','Chris','Tom'];
+        let index = ranking.indexOf('Alice');
+        let index2 = ranking.indexOf('TomCare');
+        console.log(`Alice의 인덱스 번호 : ${index}`);
+        console.log(`TomCare의 인덱스 번호 : ${index2}`);
+
+        // 12.includes() : 특정한 값이 존재하면 true, 존재하지 않으면 false
+        let hasTom = ranking.includes('Tom');
+        let hasJake = ranking.includes('Jake');
+        console.log(`hasTom 존재유무 : ${hasTom}`);
+        console.log(`hasJake 존재유무 : ${hasJake}`);
+
+        // 13. split('구분자') : 나열된 하나의 문자열을 지정한 구분자를 기준으로 쪼개서 배열로 생성하는 메소드이다.
+        let test = '사과,포도,딸기';
+        let result03= test.split(',');
+        console.log(`test 결과: ${result03}`);
+    </script>
+</body>
+</html>
