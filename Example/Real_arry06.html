@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>장바구니 수량 조절</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        h2{
+            margin: 20px;
+        }
+        span{
+            color: green;
+            font-weight: bold;
+            font-size: 18px;
+            margin-left: 20px;
+        }
+        .soldout{
+            color: red;
+            font-size: 16px;
+        }
+        .line{
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            width: 350px;
+            margin-left: 20px;
+        }
+        .line .button{
+            width: 100px;
+            display: flex;
+            justify-content: space-between;
+        }
+        button{
+            width: 35px;
+        }
+        
+    </style>
+</head>
+<body>
+    <h2>장바구니</h2>
+    <div id="output"></div>
+
+    <script>
+        let output = document.getElementById('output');
+
+        let product = ['티셔츠','양말','모자'];
+        let price = [15000,3000,12000];
+        let stock = [1,1,1];
+        let sumprice = 0;
+
+        function render(){
+            let total = 0;
+            let result ='';
+     
+            for(let i=0; i<product.length; i++){
+                sumprice = price[i]*stock[i];
+                let x = sumprice>0?sumprice.toLocaleString():`<span class='soldout'>품절</span>`;
+                
+                result += `<div class='line'>${product[i]} (${price[i].toLocaleString()}) x ${stock[i]} = <div class='total'>${x}</div>
+                           <div class='button'><button onclick="minus(${i})">-</button>
+                           <button onclick="plus(${i})">+</button></div></div>`
+                total += sumprice;
+            }
+            output.innerHTML = `${result} <span>총 합계: ${total.toLocaleString()}원</span>`;
+        }
+        render();
+        function minus(index){
+            if(stock[index]>0){
+                stock[index]--;          
+                render();
+            }
+        }
+        function plus(index){
+                stock[index]++;
+                render();
+        }
+    </script>
+</body>
+</html>

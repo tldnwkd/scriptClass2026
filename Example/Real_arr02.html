@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <h2>2.성적표(총점과 평균계산)</h2>
+    <p id="output"></p>
+    <script>
+        let scores = [
+            [85, 90, 80],
+            [70, 60, 75],
+            [95, 100, 90]
+        ];
+        let output =document.getElementById('output');
+        let result = '';
+        
+        scores.forEach((value,index)=>{
+            let sum=value[0]+value[1]+value[2];
+            let avg= sum/3;
+            result+=`학생${index+1} : ${value}| 총점 : ${sum} 평균 : ${avg.toFixed(2)}<br/>`;
+            console.log(value);
+            output.innerHTML = result;
+        })
+        
+    </script>
+</body>
+</html>

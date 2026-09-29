@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <script>
+        const arry = Array.from(Array(3), () => new Array(3).fill(0));
+        
+        for(let i=0; i<arry.length; i++){
+            for(let j=0; j<arry[i].length; j++){
+                if(arry[i]==arry[j]){
+                    arry[i][j]=1;           
+                }         
+            }
+        }
+        console.log(arry);
+
+        const arry01 = Array.from(Array(2), () => new Array(4).fill(0));
+        let count =1;
+        for(let i=0; i<arry01.length; i++){
+            for(let j=0; j<arry01[i].length; j++){
+                    arry01[i][j] = count; 
+                    count++;      
+            }
+        }
+        console.log(arry01);
+
+        const arry02 = Array.from(Array(4), () => new Array(4).fill(0));
+
+        for(let i=0; i<arry02.length; i++){
+            for(let j=0; j<arry02[i].length; j++){
+                if(j==0 || j==2){
+                    arry02[i][j]=1;           
+                }         
+            }
+        }
+        arry02.forEach((rowValue)=>{
+            rowValue.forEach((coValue,index)=>{
+                index %2==0?1:0;
+            })
+            console.log(`forEach 출력: ${rowValue}`);
+        })
+        const resultArry02 = arry02.map((rowV)=>{
+            return rowV.map((cov,ind)=>{
+                return ind %2==0?1:0;
+            })
+        })
+        console.log(resultArry02);
+
+        console.log(arry02);
+
+        let arr06 = [[1,2,3],[4,5,6]];
+        console.log(arr06);
+        let sum = 0;
+        for(let i=0; i<arr06.length; i++){
+            for(let j=0; j<arr06[i].length; j++){
+                    sum +=arr06[i][j];                           
+            }
+        }
+
+        console.log(`배열의 합계 : ${sum}`);
+
+        
+        for(let i=0; i<arr06.length; i++){
+            let sum = 0;
+            for(let j=0; j<arr06[i].length; j++){              
+                sum +=arr06[i][j];                                                  
+            }
+            console.log(`행의 합계 : ${sum}`);
+        }
+        
+        let arr07 =[
+            [3,9,2],
+            [8,7,6],
+            [1,4,5]
+        ]
+        let max =0;
+        for(let i=0; i<arr07.length; i++){
+            for(let j=0; j<arr07[i].length; j++){              
+                if(arr07[i][j]>max){
+                    max= arr07[i][j];
+                }                                                  
+            }
+        }
+        console.log(`맥스값 : ${max}`);
+    </script>
+</body>
+</html>

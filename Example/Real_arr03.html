@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>달력</title>
+    <style>
+        table{
+            border-collapse: collapse;
+            width: 400px;
+            height: 300px;
+            text-align: center;
+            border: 1px solid lightgray;
+        }
+        td{
+            border: 1px solid lightgray;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>3. 달력만들기(6X7)</h3>
+        <div id="output"></div>
+    </div>
+    <script>
+        let result = '<table border="1">';
+        const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
+        const arry = Array.from(Array(6),()=>new Array(7));
+        let output = document.getElementById('output');
+        function render(){
+            let count =1;
+            for(let i=0; i<arry.length; i++){
+                result += `<tr>`;
+                for(let j=0; j<arry[i].length; j++){
+                    i==0 ? result += `<td>${weekdays[j]}</td>`
+                    : count<32 ? result +=`<td>${arry[i][j]=count++}</td>` 
+                    : result +=`<td>${arry[i][j]=""}</td>`            
+                }    
+                result += `</tr>`;        
+            }
+            output.innerHTML = `${result}</table>`;
+        }
+        render();
+    </script>
+</body>
+</html>
