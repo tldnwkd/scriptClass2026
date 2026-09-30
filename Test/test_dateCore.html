@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코어객체</title>
+</head>
+<body>
+    <script>
+        // 자바스크립트 객체 종류
+        // 1. 코어 객체(Core/Built-in Object)
+        //    => 자바스크립트에 내장된 객체이다.
+        //    => Array, String , Date ,Math(Math.random())
+        // 2. DOM 객체(Doucument Object Model)
+        //    =>HTML의 요소들을 접근하고 제어하기위한 객체
+        //    =>doucument, getElementById(), querySelector()
+        // 3. BOM 객체(Browser Object Model)
+        //    => 웹 브라우저 전체를 제어하는 객체
+        //    => window, location ,navigator, history....
+
+        let today = new Date(); //코어 객체는 반드시 new로 생성한다.
+        console.log(`today 출력 : ${today}`);
+        console.log(typeof(today));
+
+        let oneDate = new Date(86400000);
+        console.log(`oneDate 출력 : ${oneDate}`);
+
+        // Date(인수) => 인수는 날짜와 시간을 문자열로 입력
+        let date01 = new Date('09,08,2025,14:10:00');
+        console.log(`date01 출력 : ${date01}`);
+
+        let date02 = new Date('2025/09/08/14:10:00');
+        console.log(`date02 출력 : ${date02}`);
+
+        let date03 = new Date(2025,8);
+        console.log(`date03 출력 : ${date03}`);
+
+        let date04 = new Date(2025,8,15);
+        console.log(`date04 출력 : ${date04}`);
+
+        let now = Date.now();
+        // now() 메소드 => 1970-1-1 00:00:00(UTC)부터 지금까지 전체시간을 밀리초로 나타냄
+        console.log(`now : ${now}`);
+        // console.log(`now : ${now}`);
+
+
+        // getFullYear(연도 출력) , setFullYear(연도 수정)
+        let today02 = new Date();
+        let year02 =today02.getFullYear();
+        console.log(`today02의 연도 : ${year02}`);
+        console.log(`today02의 연도2 : ${today02.getFullYear()}`);
+
+        let today03 = new Date();
+        today03.setFullYear(2001);
+        let year03 =today03.getFullYear();
+        console.log(`today03의 연도 : ${year03}`);
+
+        // 오늘 날짜의 월만 출력
+        let today04 = new Date();
+        let month04 = today04.getMonth()+1;
+        // 월은 0~11까지 표시되기 때문에 +1을 해줘야 현재 월이 표시됨
+        console.log(`today04의 월 : ${month04}`);
+
+        let day04 = today04.getDate();
+        console.log(`today04의 일 : ${day04}`);
+
+        let weekday = today04.getDay();
+        // 요일: 일(0)~ 토(6)
+        console.log(`today04의 요일 : ${weekday}`);
+
+        let today05 = new Date();
+        let localtoday = today05.toLocaleDateString();
+        console.log(`localToday 출력 : ${localtoday}`);
+
+        let localTime = today05.toLocaleTimeString();
+        console.log(`localTime 출력 : ${localTime}`);
+
+        // 오늘 날짜의 요일을 월,화,수 ... 인 문자로 출력하시오
+        let today06 = new Date(2026,8,15);
+        let weekday02 = today06.getDay();
+        let week = ['일','월','화','수','목','금','토'];
+        console.log(`today05의 요일 : ${week[weekday02]}요일`);
+
+        // --------------------------------------------
+        // document.write()는 웹 브라우저가 HTML 문서를 로딩할때
+        // 해당 위치의 원하는 텍스트, 또는 HTML 태그를 직접 출력해주는 메소드이다.
+        let today07 = new Date();
+        let week01 = ['일','월','화','수','목','금','토'];
+        let dayWeek = today07.getDay();
+
+        document.write(today07.getFullYear()+'년 <br/>');
+        document.write(today07.getMonth()+'월 <br/>');
+        document.write(today07.getDate()+'일 <br/>');
+        document.write(today07.getHours()+'시 <br/>');
+        document.write(today07.getMinutes()+'분 <br/>');
+        document.write(today07.getSeconds()+'초 <br/>');
+
+        document.write(week01[dayWeek]+'요일<br/');
+    </script>
+</body>
+</html>

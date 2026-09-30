@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>달력</title>
+    <style>
+        table{
+            border-collapse: collapse;
+            width: 400px;
+            height: 300px;
+            text-align: center;
+            /* border: 1px solid lightgray; */
+        }
+        td{
+            border: 1px solid lightgray;
+        }
+        .red{
+            color: red;
+        }
+        .blue{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        <div id="output"></div>
+    </div>
+    <script>
+        let output = document.getElementById('output');
+        
+        // 현재 날짜 상태 저장 (전역)
+        let today = new Date();
+        let year = today.getFullYear(); 
+        let month = today.getMonth(); // 0: 1월, 1: 2월 ...
+        
+        function render(){
+            let result = '<table>';
+            let array = Array.from(Array(7), () => new Array(7));
+            let weekdays = ['일', '월', '화', '수', '목', '금', '토'];
+            
+            // 1. 해당 월의 시작 정보 및 마지막 날짜를 매번 새로 계산
+            let firstDay = new Date(year, month, 1);
+            let startWeekday = firstDay.getDay(); // 1일의 요일 (0: 일요일)
+            let lastDate = new Date(year, month + 1, 0).getDate(); // 해당 월의 마지막 날짜 (28~31)
+            console.log(lastDate);
+            let day01 = 1; // 날짜 카운트 매번 1로 리셋
+            
+            for(let i = 0; i < array.length; i++){             
+                result += `<tr>`;
+                for(let j = 0; j < array[i].length; j++){
+                    if(i == 0){
+                        // 요일 헤더
+                        if(j == 0){
+                            result += `<td class="red">${weekdays[j]}</td>`;
+                        }else if(j == 6){
+                            result += `<td class="blue">${weekdays[j]}</td>`;
+                        }else{
+                            result += `<td>${weekdays[j]}</td>`;
+                        }
+                    }else if(i == 1 && j < startWeekday){
+                        // 첫 번째 주에서 1일 시작 전 빈 칸
+                        result += `<td></td>`;
+                    }else{
+                        if(day01 <= lastDate){
+                            if(j == 6){
+                                result += `<td class="blue">${array[i][j] = day01++}</td>`;
+                            }else if(j == 0){
+                                result += `<td class="red">${array[i][j] = day01++}</td>`;
+                            }else{
+                                result += `<td>${array[i][j] = day01++}</td>`;
+                            }                               
+                        }else{
+                            // 마지막 날짜 이후 빈 칸
+                            result += `<td>${array[i][j] = ""}</td>`;
+                        }           
+                    }
+                }
+                result += `</tr>`;        
+            }                 
+            
+            // JS getMonth()는 0부터 시작하므로 화면에는 month + 1로 출력
+            output.innerHTML = 
+            `<button onclick="back()"><</button> ${year}년 ${month + 1}월
+            <button onclick="next()">></button> ${result}</table>`;
+        }
+        
+        render();
+        
+        // 이전 달 버튼
+        function back(){
+            month--;
+            if(month < 0){
+                month = 11;
+                year--;
+            }
+            render();
+        }
+
+        // 다음 달 버튼
+        function next(){
+            month++;
+            if(month > 11){
+                month = 0;
+                year++;
+            }
+            render();
+        }
+    </script>
+</body>
+</html>

@@ -10,37 +10,105 @@
             width: 400px;
             height: 300px;
             text-align: center;
+            border: none;
             border: 1px solid lightgray;
         }
         td{
             border: 1px solid lightgray;
         }
+        .red{
+            color: red;
+        }
+        .blue{
+            color: blue;
+        }
+    
     </style>
 </head>
 <body>
-    <div class="container">
-        <h3>3. 달력만들기(6X7)</h3>
+    <div class="container" id="container">
         <div id="output"></div>
     </div>
     <script>
-        let result = '<table border="1">';
-        const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
-        const arry = Array.from(Array(6),()=>new Array(7));
+        
         let output = document.getElementById('output');
+        let today = new Date();
+        let year = today.getFullYear(); // 연
+        let month = today.getMonth()+1; // 월
+        
         function render(){
-            let count =1;
-            for(let i=0; i<arry.length; i++){
+                let day = today.getDate(); // 일
+            // let weekdays = ['일', '월', '화', '수', '목', '금', '토'];
+                let tomorrow = new Date(today);
+                tomorrow.setDate(1); //일
+                let day01 = tomorrow.getDate(); //일
+                let weekday = today.getDay(); //요일
+                let result = '<table>';
+                let now = Date.now(weekday);
+                let now1 = Date.now(day01);
+                let array = Array.from(Array(7),()=>new Array(7));
+                let weekdays = ['일', '월', '화', '수', '목', '금', '토'];
+                
+                
+                for(let i=0; i<array.length; i++){             
                 result += `<tr>`;
-                for(let j=0; j<arry[i].length; j++){
-                    i==0 ? result += `<td>${weekdays[j]}</td>`
-                    : count<32 ? result +=`<td>${arry[i][j]=count++}</td>` 
-                    : result +=`<td>${arry[i][j]=""}</td>`            
-                }    
+                for(let j=0; j<array[i].length; j++){
+                    if(i==0){
+                        if(j==0){
+                        result += `<td class="red">${weekdays[j]}</td>`
+                        }else if(j==6){
+                            result += `<td class="blue">${weekdays[j]}</td>`
+                        }else{
+                            result += `<td>${weekdays[j]}</td>`
+                        }
+                    }else if(array[1][j] == array[i][day01]){
+                        result +=`<td>${array[i][j]=""}</td>`                
+                    }else{
+                        if(day01<32){
+                            if(j==6 ){
+                                result +=`<td class="blue">${array[i][j]=day01++}</td>`
+                            }else if(j==0){
+                                result +=`<td class = 'red'>${array[i][j]=day01++}</td>`             
+                            }else{
+                                result +=`<td>${array[i][j]=day01++}</td>`
+                            }                              
+                        }else{
+                        result +=`<td>${array[i][j]=""}</td>`}           
+                    }
+                }
                 result += `</tr>`;        
-            }
-            output.innerHTML = `${result}</table>`;
+            }                 
+            output.innerHTML = 
+            `<button onclick="back()"><</button>${year}년${month}월
+            <button onclick="next()">></button>${result}</table>`;
         }
+        
         render();
+        
+        // if(arry[i][j]==arry[i][0] || arry[i][6]){                  
+            // }else{
+                // : day01<31 ? result +=`<td>${arry[i][j]=day01++}</td>` 
+                    // : result +=`<td>${arry[i][j]=""}</td>`;
+                    // }
+        
+            function back(){
+            month--;
+            if(month < 1){
+                month = 12;
+                year--;
+            }
+            render();
+            }
+            
+        
+        function next(){
+            month++;
+            if(month > 12){
+                month = 1;
+                year++;
+            }
+            render();
+        }
     </script>
 </body>
 </html>
