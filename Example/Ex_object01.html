@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오브젝트 기초연습문제</title>
+</head>
+<body>
+    <h2>1.학생 성적 관리 프로그램</h2>
+    <p id="output"></p>
+    <script>
+        // 학생 객체 student를 만들고, 이름(name), 나이(age), 전공(major)을 속성으로 저장한 뒤
+        // console.log()로 출력하세요.
+        let student = {
+            name:'홍길동',
+            age: 28,
+            major:'컴퓨터공학'
+        }
+        console.log('학생정보:',student);
+
+        // 자동차 객체 car를 만들고, 브랜드(brand), 색상(color), 가격(price)을 저장하세요.
+        // 이후 색상을 "검정색"으로 바꾸고, 가격을 3000으로 수정한 뒤 console.log()로 출력하세요.
+
+        let car = {
+            brand: "Hyundai",
+            color: "흰색",
+            price: 2500
+        };
+        console.log('자동차정보:',car);
+        car.color="검정색";
+        car.price=3000;
+        console.log('자동차정보:',car);
+
+        // 상품 객체 item1, item2를 만들고 각각 이름(name), 가격(price), 수량(quantity)를 저장하세요.
+        // 그 후 배열 cart에 넣고, 장바구니 총 금액을 console.log()로 구하세요.
+        
+        let item1 = { name: "노트북", price: 1000, quantity: 1 };
+        let item2 = { name: "마우스", price: 50, quantity: 2 };
+        let cart = [item1,item2];
+
+        // 오브젝트 배열에서 각 데이터마다 식별자가 필요하다.
+        // 식별자는 기본 id:0 , id:1 ...... 데이터베이스의 PK와 같은 역할을 한다.
+        let cart02 =[
+            {id:0, name: "노트북", price: 1000, quantity: 1 },
+            {id:1, name: "마우스", price: 50, quantity: 2 }
+        ]
+        let sum= 0;
+        for(let i=0; i<cart.length; i++){
+            sum+=cart[i].price*cart[i].quantity
+        }
+        console.log(sum);
+
+        // 학생 3명의 정보를 객체로 만들고(name, kor, eng, math), 각 객체를 배열 students에 저장하시
+        // 오. (단, 아래 자료 이용)
+        // '홍길동', kor: 90, eng: 80, math: 85
+        // '성춘향', kor: 95, eng: 88, math: 92
+        // '이몽룡', kor: 70, eng: 75, math: 80 
+        // ② 각 학생의 평균 점수를 계산해 <p> 태그에 출력하시오.
+
+        let info = {
+            name:'홍길동', kor: 90, eng: 80, math: 85,
+            name:'성춘향', kor: 95, eng: 88, math: 92,
+            name:'이몽룡', kor: 70, eng: 75, math: 80 
+        }
+
+        let students = [
+            {id:0, name:'홍길동', kor: 90, eng: 80, math: 85},
+            {id:1, name:'성춘향', kor: 95, eng: 88, math: 92},
+            {id:2, name:'이몽룡', kor: 70, eng: 75, math: 80}
+        ]
+        let output =document.getElementById('output');
+        let avg =0;
+        let result = '';
+        for(let i=0; i<students.length; i++){
+            avg=(students[i].kor+students[i].eng+students[i].math)/3 
+            result += `${students[i].name}의 평균 점수 : ${avg.toFixed(2)}<br/>`;
+        }
+        output.innerHTML = result;
+    </script>
+</body>
+</html>

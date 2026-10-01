@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object</title>
+</head>
+<body>
+    <script>
+        // (1) 객체 리터럴 (가장 많이 사용)
+        // 클래스 없이도 { name: "Kim", age: 20 }처럼 객체 리터럴 형태로
+        // 즉석에서 객체를 만들어 쓸 수 있다. 
+        let book = {
+            title: "JavaScript",
+            author: "홍길동",
+            page: 500,
+            price: 15000
+        };
+        //객체 접근 방법 : 객체이름.property
+        // ``(백틱)또는 +(문자나열)로 콘솔을 출력하는 경우는 
+        // 자바스크립트가 기본적으로 book.toString()방식으로 메소드 자동 호출한다.
+        // 고로 문자열로 나열된 상태다
+        console.log(`book 객체 : ${book}`); //[object Object]
+        console.log(`book 객체 : ${book.title}`);
+        console.log('book 객체 :'+book);
+        // 'book 객체 :',book : book -> 각각 독립된 상태로 콘솔 출력됨
+        console.log('book 객체 :',book);
+
+        // (3) 생성자 함수 사용 
+        function Book(title, author, page, price) {
+            this.title = title;
+            this.author = author;
+            this.page = page;
+            this.price = price;
+        }
+        let myBook = new Book("JavaScript", "홍길동", 500, 15000);
+        console.log('myBook 객체 :',myBook);
+
+        let Book02={
+            title:'CSS',
+            author:'진달래',
+            page:30,
+            price:2500,
+            info:function(){
+                alert(`${this.title}책의 분량은 ${this.page}쪽이다.`);
+            }
+        }
+        Book02.info();
+    </script>
+</body>
+</html>

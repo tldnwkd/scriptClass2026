@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>달력</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html{
+            margin: auto;
+        }
+        #date-wrap{
+            display: flex;
+            width: 300px;
+            justify-content: space-between;
+        }
+        
+        #displayTable{
+            width: 300px;
+            display: flex;
+            justify-content: center;
+        }
+        tr{
+          width: 300px;
+          display: flex;
+          justify-content: space-between;  
+        }
+    </style>
+</head>
+<body>
+    <!-- 1.html -->
+     <!-- 2.배열에 달력값만 저장하는 함수 -->
+     <!-- 3.화면에 출력하는 함수 -->
+     <!-- 달력 HTML구조 -->
+      <div class="container">
+        <div id="date-wrap">
+            <button id="previousButton" onclick="previousButton()">&lt;</button>
+            <div id="main_date"></div>
+            <button id="nextButton" onclick="nextButton()">&gt;</button>           
+        </div>
+        <table id="date-week">
+            <thead>
+                <th>SUN</th>
+                <th>MON</th>
+                <th>THE</th>
+                <th>WED</th>
+                <th>THU</th>
+                <th>FRI</th>
+                <th>SAT</th>
+            </thead>
+        </table>
+        <div id="displayTable"></div>
+      </div>
+      <script>
+        let yearMonth = document.getElementById('main_date');
+        let displayTable = document.getElementById('displayTable');
+        let today = new Date(); //오늘 날짜
+
+        let arr = Array.from(Array(6),()=>new Array(7));
+
+        //달력의 배열에 값을 저장하는 함수 작성
+        function calendar(){
+            let year = today.getFullYear();
+            let month = today.getMonth();
+            let lastDate = new Date(year, month+1, 0); 
+            let lastDay = lastDate.getDate();//마지막 일자
+            let startDate = new Date(year, month,1) //월의 첫 일자
+            let startday = startDate.getDate(); //월의 일자
+            let startWeek = startDate.getDay(); //요일이 숫자(0~6),4=(목);
+            let row = 0; //arr[row][startweek]
+
+            //배열값을 빈값으로 초기화
+            for(let i=0; i<arr.length; i++){
+                for(let j=0; j<arr[i].length; j++){
+                    arr[i][j]="";
+                }
+            }
+            // 달력 배열에 실제 값을 채우는 코드
+            // startDay =1 ~lastday=31
+            for(let i=startday; i<=lastDay; i++){
+                arr[row][startWeek] = i; // 1일의 시작지점을 요일(숫자)와 맞춤
+                // 7일이 되면 줄 바꿈
+                if(startWeek <6){ // 아직 7일이 지나지 않은 상태
+                    startWeek++;
+                }else{ //7일 되어 줄 바꿈
+                    row++;
+                    startWeek=0; //startWeek 초기화하여 맨 왼쪽 첫번째 칸부터 저장됨
+                }
+            }
+
+            console.log(`${year}년${month+1}월 달력 데이터 : `,arr);
+        }
+        calendar();
+        function display(){
+            calendar();
+
+            let tb="<table class='cal_table'>";
+            for(let i=0; i<arr.length; i++){
+                tb += "<tr>";
+                for(let j=0; j<arr[i].length; j++){
+                    tb +="<td>"+arr[i][j]+"</td>"
+                }
+                tb +="</tr>";
+            }
+            tb += "</table>"
+            let yearmonth = today.getFullYear()+"년"+(today.getMonth()+1)+"월";
+            yearMonth.innerHTML=yearmonth;
+            displayTable.innerHTML =tb;
+        }
+        display();
+        function previousButton(){
+            today = new Date(today.getFullYear(),today.getMonth()-1,1);
+            display();
+        }
+        function nextButton(){
+            today = new Date(today.getFullYear(),today.getMonth()+1,1);
+            display();
+        }
+      </script>
+</body>
+</html>

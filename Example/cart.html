@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>장바구니</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        h2{
+            border-bottom: 2px solid black;
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        body{
+            width: 850px;
+            /* border: 1px solid red; */
+        }
+        button{
+            padding: 0 10px;
+            height: 25px;
+        }
+        .totalprice{
+            text-align: end;
+        }
+        thead tr{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            background-color: rgb(77, 76, 76);
+            border: 1px solid gray;
+            padding: 5px;
+            color: white;
+        }
+        thead tr th{
+            margin-right: 20px;
+        }
+        tbody tr{
+            width: 100%;
+            border: 1px solid lightgray;
+            display: flex;
+            justify-content: space-between; 
+            padding: 10px 10px;
+        }
+        table{
+            width: 100%;
+            margin-left: 20px;
+        }
+        .totalprice{
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h2>장바구니</h2>
+        <table id="cartTable">
+            <thead>
+                <tr>
+                    <th>상품명</th>
+                    <th>가격</th>
+                    <th>수량</th>
+                    <th>합계</th>
+                    <th>조작</th>
+                </tr>
+            </thead>
+            <tbody id="cartBody"></tbody>
+        </table>
+        
+    <div id="total">총 금액: 0원</div>
+
+    <script>
+        let cartList = [
+            { id: 1, name: '노트북', price: 1200000, quantity: 1 },
+            { id: 2, name: '마우스', price: 20000, quantity: 2 },
+            { id: 3, name: '키보드', price: 50000, quantity: 1 },
+        ];
+        let cartBody = document.getElementById('cartBody');
+        let total = document.getElementById('total');
+        let sum =0;
+        let totalprice =0;
+        function renderCart(){ 
+            let result = "<tr>";
+            for(let i=0; i<cartList.length; i++){
+                totalprice = cartList[i].price*cartList[i].quantity;
+                result += `<td>${cartList[i].name}</td>
+                          <td>${cartList[i].price.toLocaleString()}</td>  
+                          <td>${cartList[i].quantity}</td>  
+                          <td>${totalprice.toLocaleString()}</td><td><button onclick="plus(${i})">+</button>
+                                           <button onclick="minus(${i})">-</button>
+                                           <button onclick="deleteitem(${i})">x</button></td></tr>`
+                sum+= totalprice;  
+            }
+            cartBody.innerHTML = result; 
+            totalresult()
+        }
+        
+        renderCart();
+        function plus(index){      
+                if(cartList[index].quantity<=9){
+                    cartList[index].quantity++;
+                }else{
+                    alert('더 이상 증가 불가능');
+                }  
+            renderCart();
+        }
+        function minus(index){
+            if(cartList[index].quantity>1){
+                    cartList[index].quantity--;
+                }else{
+                    alert('수량은 최소 1개 이상이어야 합니다.');
+                }  
+            totalresult();
+            renderCart();
+        }
+        function deleteitem(index){
+            cartList.splice(index,1)
+            totalresult();
+            renderCart();    
+        }
+        function totalresult(){
+            total.innerHTML = `<div class="totalprice">총 금액 : ${sum.toLocaleString()}원</div>`;
+            sum=0;
+        }
+    </script>
+</body>
+</html>

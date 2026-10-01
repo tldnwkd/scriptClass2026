@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>키오스크</title>
+    <style>
+        .container{
+            width: 900px;
+            height: 700px;
+            margin: 0 auto;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="menu-container">
+            <div>
+                <h6>원하시는 음료를 선택해 주세요</h6>
+                <p>please choose the drink you want</p>
+                <button class="menu">menu</button>
+            </div>
+            <ul id="menu"></ul>
+        </div>
+        <div class="order-container">
+            <h4>주문내역</h4>
+            <div class="order-list">
+                <ul id="orderitem"></ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        let menu =document.getElementById('menu');
+        let orderitem =document.getElementById('orderitem');
+        let menus = [
+            { id: 0, name: '아메리카노', type: 'HOT', price: 1000,quantity:1 },
+            { id: 1, name: '아메리카노', type: 'ICE', price: 1300,quantity:1 },
+            { id: 2, name: '바닐라라떼', type: 'HOT', price: 2500,quantity:1 },
+            { id: 3, name: '바닐라라떼', type: 'ICE', price: 2800,quantity:1 },
+            { id: 4, name: '연유라떼', type: 'HOT', price: 2500,quantity:1 },
+            { id: 5, name: '연유라떼', type: 'ICE', price: 2800,quantity:1 },
+            { id: 6, name: '카라멜마끼아또', type: 'HOT', price: 2800,quantity:1 },
+            { id: 7, name: '카라멜마끼아또', type: 'ICE', price: 3000,quantity:1 },
+            { id: 8, name: '카페모카', type: 'HOT', price: 3000,quantity:1 },
+            { id: 9, name: '카페모카', type: 'ICE', price: 3300,quantity:1 },
+            { id: 10, name: '딥카페라테', type: 'HOT', price: 3400,quantity:1 },
+            { id: 11, name: '딥카페라테', type: 'ICE', price: 3700,quantity:1 },
+            ];
+
+            function render(){
+                let result ='';
+                for(let i=0; i<menus.length; i++){
+                    result+= `<li id="product" onclick="add(${i})">
+                        <img src="/images/${i}.png" alt="${menus[i].type}${menus[i].name}">
+                        <div class="menu-temp">${menus[i].type}</div>
+                        <div class="menu-name">${menus[i].name}</div>
+                        <div class="menu-price">${menus[i].price}</div></li>`;
+                    }
+                    menu.innerHTML = `${result}`;           
+            }
+            
+            render();
+                
+                function add(index){          
+                    let resultorder ='';
+                    let totalprice = menus[index].price*menus[index].quantity;    
+                    resultorder += `<li>${menus[index].name}(${menus[index].type})${menus[index].quantity}개,${totalprice}원
+                        <button onclick="plus(${index})">+</button>
+                        <button onclick="minus(${index})">-</button>
+                        <button onclick="deleteitem(${index})">x</button></li>`
+                        orderitem.innerHTML= resultorder;
+                    }
+               
+                    
+                function plus(index){
+                // if(menus[index].id!=){                 
+                menus[index].quantity++;       
+                resultorder ="";
+                button(index);
+                // }else{
+                //    menus[index].quantity++;
+                //    button(index);     
+                // }
+            }
+        function minus(index){
+            if(menus[index].quantity>1){
+                    menus[index].quantity--; 
+                }else{
+                    alert('수량은 최소 1개 이상이어야 합니다.');
+                }
+            resultorder ="";
+            button(index);         
+        }
+        function deleteitem(index){
+            menus.splice(index,1);
+            resultorder ="";     
+            render();
+        }   
+    </script>
+</body>
+</html>
