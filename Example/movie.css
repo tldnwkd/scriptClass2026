@@ -1,0 +1,182 @@
+@charset 'utf-8';
+
+*{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container{
+    width: 900px;
+    /* border: 1px solid red; */
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding-top: 50px;
+    margin-top: 100px;
+}
+.seatcontainer{
+    border-top: 2px solid black;
+    width: 75%;
+    margin-right: 15px;
+}
+.infocontainer{
+    width: 25%;
+    background-color: rgb(49, 49, 49);
+    color: white;
+    border-radius: 10px;
+}
+h2{
+    position: absolute;
+    left:0;
+    top: 0;;
+}
+.seatcontainer-child{
+    display: flex;
+    justify-content: space-between;
+    margin: 7px 0;
+}
+.seatcontainer-child button{
+    width: 80px;
+    background-color: white;
+    border: 1px solid lightgrey;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-family: 'Times New Roman', Times, serif;
+}
+h3{
+    font-weight: 500;
+}
+.seatcontainer-child02{
+    display: flex;
+    background-color: rgb(240, 239, 239);
+    padding: 12px 0;
+}
+.seatcontainer-child02 div{
+    display: flex;
+    width: 25%;
+    margin-left: 8px;
+}
+.seatcontainer-child02 div button{
+    border: 1px solid lightgray;
+    background-color: white;
+}
+.seatcontainer-child02 div #adultminus,
+.seatcontainer-child02 div #preminus{
+    width: 30px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.seatcontainer-child02 div #adultplus,
+.seatcontainer-child02 div #preplus{
+    width: 30px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.seatcontainer-child02 div #adult,
+.seatcontainer-child02 div #pre{
+ width: 40px;
+}
+.movie-info{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10px;
+}
+.movietitle{
+    margin-top: 8px;
+    margin-left: 10px;
+    font-size: 12px;
+}
+.age{
+    border: 1px solid red;
+    border-radius: 5px;
+    background-color: red;
+    font-weight: bold;
+    font-size: 10px;
+    margin-right: 5px;
+}
+.dimension{
+    margin-left: 30px;
+}
+.movie-info{
+    border-top: 1px solid lightgray;
+    padding-top: 10px;
+    margin-top: 5px;
+    font-size: 9px;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 10px;
+}
+.movie-info img{
+    height: 70px;
+}
+.movie-time{
+    font-size: 9px;
+}
+.time-change{
+    background-color: rgb(49, 49, 49);
+    border-radius: 50%;
+    font-size: 8px;
+    color: white;
+    border: 1px solid lightgray;
+    width: 10px;
+    text-align: center;
+    align-items: center;
+    height: 10px;
+    line-height: 8px;
+    margin-left: 10px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+.choice-container{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid lightgray;
+    width: 90%;
+    justify-self: center;
+    height: 170px;
+    margin-top: 10px;
+    border-radius: 3px;
+    margin-bottom: 50px;
+}
+.choicetype div img{
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+}
+.choicetype div{
+    font-size: 9px;
+    margin-top: 5px;
+}
+.choicetype {
+    width: 60%;
+    /* border-right: 1px solid lightgray; */
+    margin: 10px auto;
+    margin-left: 10px;
+}
+.choiceseat{
+    width: 50%;
+    text-align: center;
+    border-left: 1px solid lightgray;
+}
+.choice-child {
+    font-size: 10px;
+    margin-top: 10px;
+}
+.nextback button{
+    width: 50%;
+    border: none;
+    cursor: pointer;
+}
+.nextback{
+    display: flex;
+    height: 30px;
+}
+.back{
+    background-color: gray;
+    border-bottom-left-radius: 5px;
+}
+.next{
+    background-color: lightgray;
+    border-bottom-right-radius: 5px;
+}

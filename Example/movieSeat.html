@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메가박스</title>
+    <link rel="stylesheet" href="/Example/movie.css">
+</head>
+<body>
+    <div class="container">
+        <h2>빠른 예매</h3>
+        <div class="seatcontainer">
+            <div class="seatcontainer-child">
+                <h3>관람인원 선택</h3>
+                <button onclick="reset()">&#8635;초기화</button>
+            </div>
+            <div class="seatcontainer-child02">
+                <div>
+                    성인&nbsp;&nbsp;
+                    <button id="adultminus">-</button>
+                    <button id="adult">0</button>
+                    <button id="adultplus">+</button>
+                </div>
+                <div>
+                    우대&nbsp;&nbsp;
+                    <button id="preminus">-</button>
+                    <button id="pre">0</button>
+                    <button id="preplus">+</button>
+                </div>
+            </div>
+            <div class="seat" id="seatwrap"></div> <!-- render 그릴곳 -->
+        </div>
+        <div class="infocontainer">
+            <div class="movietitle"><span class="age">19</span>타짜: 벨제붑의 노래</div>
+            <div class="dimension">2D</div>
+            <div class="movie-info">
+                <div class="movie-info-child">
+                    <div>검단</div>
+                    <div>컴포트1관</div>
+                    <div>2026.10.02(금)</div>
+                    <div class="movie-time">21:00~23:19 &nbsp;<button class="time-change">v</button></div>
+                </div>
+                <img src="/images/tazza.png" alt="타짜">
+            </div>
+            <div class="choice-container">
+                <div class="choicetype">
+                    <div><img src="/images/seat1.png" alt="선택">선택</div>
+                    <div><img src="/images/seat2.png" alt="예매완료">예매완료</div>
+                    <div><img src="/images/seat3.png" alt="선택불가">선택불가</div>
+                    <div><img src="/images/seat4.png" alt="일반">일반</div>
+                    <div><img src="/images/seat5.png" alt="커플석">커플석</div>
+                </div>
+                <div class="choiceseat">
+                    <div class="choice-child">선택좌석</div>
+                    <div class="seatchild" id="seatnumber"></div> <!-- seatrender 그릴곳 -->
+                </div>
+            </div>
+            <div class="personnelinfo" id="personnel"></div> <!-- 인원수 표시 그릴곳 -->
+            <div class="Reservationinfo" id="Reservation"></div> <!-- 최종결제금액 그릴곳 -->
+            <div class="nextback">
+                <button class="back">이전</button>
+                <button class="next">다음</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let seatwrap = document.getElementById('seatwrap');
+        let seatnumber = document.getElementById('seatnumber');
+        let personnel = document.getElementById('personnel');
+        let Reservation = document.getElementById('Reservation');
+
+        let arry = Array.from(Array(10), () => new Array(10).fill(0));
+        function render(){
+
+        }
+    </script>
+</body>
+</html>

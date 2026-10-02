@@ -4,35 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>키오스크</title>
-    <style>
-        .container{
-            width: 900px;
-            height: 700px;
-            margin: 0 auto;
-            border: 1px solid red;
-        }
-    </style>
+     <link rel="stylesheet" href="/Example/kioskCafe.css">
 </head>
 <body>
     <div class="container">
         <div class="menu-container">
             <div>
-                <h6>원하시는 음료를 선택해 주세요</h6>
+                <h2>원하시는 음료를 선택해 주세요</h2>
                 <p>please choose the drink you want</p>
                 <button class="menu">menu</button>
             </div>
             <ul id="menu"></ul>
         </div>
         <div class="order-container">
-            <h4>주문내역</h4>
+             <h4>주문내역</h4>
+             <div class="deleteall" onclick="deleteall()">x</div> 
             <div class="order-list">
                 <ul id="orderitem"></ul>
             </div>
+            <div id="totalorder"></div>
         </div>
     </div>
     <script>
+        
         let menu =document.getElementById('menu');
         let orderitem =document.getElementById('orderitem');
+        let totalorder = document.getElementById('totalorder');
         let menus = [
             { id: 0, name: '아메리카노', type: 'HOT', price: 1000,quantity:1 },
             { id: 1, name: '아메리카노', type: 'ICE', price: 1300,quantity:1 },
@@ -47,56 +44,76 @@
             { id: 10, name: '딥카페라테', type: 'HOT', price: 3400,quantity:1 },
             { id: 11, name: '딥카페라테', type: 'ICE', price: 3700,quantity:1 },
             ];
+        let cart = [];
 
-            function render(){
-                let result ='';
-                for(let i=0; i<menus.length; i++){
-                    result+= `<li id="product" onclick="add(${i})">
-                        <img src="/images/${i}.png" alt="${menus[i].type}${menus[i].name}">
-                        <div class="menu-temp">${menus[i].type}</div>
-                        <div class="menu-name">${menus[i].name}</div>
-                        <div class="menu-price">${menus[i].price}</div></li>`;
-                    }
+        function render(){
+             let result ='';
+            for(let i=0; i<menus.length; i++){
+                result+= `<li class="product" onclick="add(${i})">
+                    <img src="/images/${i}.png" alt="${menus[i].type}${menus[i].name}">
+                    <div class="menu-temp">${menus[i].type}</div>
+                    <div class="menu-name">${menus[i].name}</div>
+                    <div class="menu-price">${menus[i].price}</div></li>`;
+            }
                     menu.innerHTML = `${result}`;           
-            }
-            
-            render();
+        }           
+        render();
                 
-                function add(index){          
-                    let resultorder ='';
-                    let totalprice = menus[index].price*menus[index].quantity;    
-                    resultorder += `<li>${menus[index].name}(${menus[index].type})${menus[index].quantity}개,${totalprice}원
-                        <button onclick="plus(${index})">+</button>
-                        <button onclick="minus(${index})">-</button>
-                        <button onclick="deleteitem(${index})">x</button></li>`
-                        orderitem.innerHTML= resultorder;
-                    }
-               
-                    
-                function plus(index){
-                // if(menus[index].id!=){                 
-                menus[index].quantity++;       
-                resultorder ="";
-                button(index);
-                // }else{
-                //    menus[index].quantity++;
-                //    button(index);     
-                // }
+        function add(index){
+            let chk = -1;
+            for(let i=0; i<cart.length; i++){
+                if(cart[i].id==menus[index].id){
+                    chk=0;
+                    cart[i].quantity++;
+                }              
             }
+            if(chk==-1){
+                cart.push(menus[index]);
+            }                     
+            rendercart();
+        }
+
+        function rendercart(){
+            let resultorder =''; 
+            let totalprice =0;   
+            let totalquantity =0;   
+            for(let i=0; i<cart.length; i++){
+                resultorder += `<li><div class="iteminfo">${i+1}. ${cart[i].name} (${cart[i].type}) ${cart[i].quantity}개 <br>${cart[i].price*cart[i].quantity}원</div>
+                <div class="buttonbox"><button onclick="plus(${i})">+</button>
+                <button onclick="minus(${i})">-</button>
+                <span><button onclick="deleteitem(${i})">x</button></span></div></li>`
+                totalprice += cart[i].price*cart[i].quantity;
+                totalquantity += cart[i].quantity;
+            }
+                orderitem.innerHTML = `${resultorder}`;  
+                totalorder.innerHTML = `<div class="totalcontainer"><div class="totalquantity">총 수량 : <span>${totalquantity} </span>개</div><div class="totalprice"> 총 결제금액 : <span>${totalprice}</span>원</div></div>`;      
+            }            
+                    
+        function plus(index){          
+            cart[index].quantity++;       
+            rendercart();
+        }
+
         function minus(index){
-            if(menus[index].quantity>1){
-                    menus[index].quantity--; 
+            if(cart[index].quantity>1){
+                    cart[index].quantity--; 
                 }else{
                     alert('수량은 최소 1개 이상이어야 합니다.');
                 }
-            resultorder ="";
-            button(index);         
+            rendercart();         
         }
+
         function deleteitem(index){
-            menus.splice(index,1);
+            cart.splice(index,1);
             resultorder ="";     
-            render();
-        }   
+            rendercart(); 
+        }
+
+        function deleteall(){
+            cart.splice(0,cart.length);
+            resultorder ="";     
+            rendercart(); 
+        } 
     </script>
 </body>
 </html>
