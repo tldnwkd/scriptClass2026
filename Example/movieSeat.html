@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>메가박스</title>
-    <link rel="stylesheet" href="/Example/movie.css">
+    <link rel="stylesheet" href="movie.css">
 </head>
 <body>
     <div class="container">
@@ -14,21 +14,25 @@
                 <h3>관람인원 선택</h3>
                 <button onclick="reset()">&#8635;초기화</button>
             </div>
-            <div class="seatcontainer-child02">
-                <div>
-                    성인&nbsp;&nbsp;
-                    <button id="adultminus">-</button>
-                    <button id="adult">0</button>
-                    <button id="adultplus">+</button>
+            <div class="seatcontainer-first">
+                <div class="seatcontainer-child02">
+                    <div id="adultwrap">
+                        성인&nbsp;&nbsp;
+                        <button id="adultminus" onclick="adultminus()">-</button>
+                        <button id="adult">0</button>
+                        <button id="adultplus" onclick="adultplus()">+</button>
+                    </div>
+                    <div>  
+                        우대&nbsp;&nbsp;
+                        <button id="preminus" onclick="preminus()">-</button>
+                        <button id="pre">0</button>
+                        <button id="preplus" onclick="preplus()">+</button>          
+                    </div>
                 </div>
-                <div>
-                    우대&nbsp;&nbsp;
-                    <button id="preminus">-</button>
-                    <button id="pre">0</button>
-                    <button id="preplus">+</button>
-                </div>
+            
+                <div><h4>SCREEN</h4></div>
+                <div class="seat" id="seatwrap"></div> <!-- render 그릴곳 -->
             </div>
-            <div class="seat" id="seatwrap"></div> <!-- render 그릴곳 -->
         </div>
         <div class="infocontainer">
             <div class="movietitle"><span class="age">19</span>타짜: 벨제붑의 노래</div>
@@ -40,15 +44,15 @@
                     <div>2026.10.02(금)</div>
                     <div class="movie-time">21:00~23:19 &nbsp;<button class="time-change">v</button></div>
                 </div>
-                <img src="/images/tazza.png" alt="타짜">
+                <img src="images/tazza.png" alt="타짜">
             </div>
             <div class="choice-container">
                 <div class="choicetype">
-                    <div><img src="/images/seat1.png" alt="선택">선택</div>
-                    <div><img src="/images/seat2.png" alt="예매완료">예매완료</div>
-                    <div><img src="/images/seat3.png" alt="선택불가">선택불가</div>
-                    <div><img src="/images/seat4.png" alt="일반">일반</div>
-                    <div><img src="/images/seat5.png" alt="커플석">커플석</div>
+                    <div><img src="images/seat1.png" alt="선택">선택</div>
+                    <div><img src="images/seat2.png" alt="예매완료">예매완료</div>
+                    <div><img src="images/seat3.png" alt="선택불가">선택불가</div>
+                    <div><img src="images/seat4.png" alt="일반">일반</div>
+                    <div><img src="images/seat5.png" alt="커플석">커플석</div>
                 </div>
                 <div class="choiceseat">
                     <div class="choice-child">선택좌석</div>
@@ -69,11 +73,185 @@
         let seatnumber = document.getElementById('seatnumber');
         let personnel = document.getElementById('personnel');
         let Reservation = document.getElementById('Reservation');
+        let adult = document.getElementById('adult');
+        let pre = document.getElementById('pre');
+        let adultwrap = document.getElementById('adultwrap');
+        let adultcount =0;
+        let precount =0;
+        let maxcount =0; //선택좌석 갯수 누적
+
+        // let seatnum = document.querySelectorAll('#seat-table td');
+        // console.log(seatnum);
+
+        // seatnum.forEach((item)=>{
+        //     item.addEventListener('click',()=>{
+        //         item.style.color='blue';
+        //     })
+        // })
 
         let arry = Array.from(Array(10), () => new Array(10).fill(0));
-        function render(){
+        let arryeng = ['A', 'B', 'C', 'D', 'E', 'F', 'G','H','I','J'];
+        // let arrynum = [1,2,3,4,5,6,7,8,9,10];
+        let choiceseat = new Array(8).fill('-');
+        let seatresult = ['', '', '', '', '', '', '', ''];
+        
+        function render(){ //좌석 그리는 메소드
+            let result = `</div><table class="seattable">`;
+            let resulteng = `<div class="eng">`;
+                for(let i=0; i<arryeng.length; i++){
+                    resulteng+=`<div>${arryeng[i]}</div>`;
+                }
+                
+                for(let i=0; i<arry.length; i++){
+                    result +=`<tr class="table-number">`;
+                    for(let j=0; j<arry[i].length; j++){        
+                        arry[i][j]=i+1;
+                        result+=`<td class="seatnum" onclick="choicerender(${i},${j})">${arry[i][j]}`;
+                    }   
+                }
+                seatwrap.innerHTML = `${resulteng}${result}</td></tr>`;
+                console.log(arry);
+        }
+        render();
+
+       
+        function seatrender(){ // 선택좌석 그리는 메소드
+            let result = `<ul>`;      
+                for(let i=0; i<choiceseat.length; i++){
+                    result += `<li>${choiceseat[i]}</li>`
+                }
+                seatnumber.innerHTML = `${result}</ul>`;
+        }
+        seatrender()
+
+        function seatrender02(){ // 선택좌석 다시그리는 메소드
+            let result = `<ul>`;      
+                for(let i=0; i<seatresult.length; i++){
+                    if(seatresult[i]==''){
+                        seatresult[i]='-';
+                    }
+                    result += `<li class="lireset">${seatresult[i]}</li>`
+                }
+                seatnumber.innerHTML = `${result}</ul>`;
+        }
+        let lireset = document.querySelectorAll('lireset');
+        function choicerender(index,index02){ //좌석 선택시 선택좌석 다시그리는 메소드
+            let count = adultcount + precount;
+            let ind = index + 1;
+            let seatName = arryeng[index02] + ind;
+            let targetIndex = -1;
+            let removeIndex = -1;
+            
+            
+            for (let i = 0; i < seatresult.length; i++ ) {
+                if (seatresult[i] == '-' || !seatresult[i]){
+                    targetIndex = i;
+                    break; 
+                }
+            }
+            
+            
+            if (targetIndex != -1) {
+                console.log('현재',targetIndex)
+                console.log(`현재index of: ${seatresult.indexOf(seatName)}`);
+                if(maxcount<count){
+                    if(seatresult.indexOf(seatName) == -1){
+                        seatresult.splice(targetIndex, 1, seatName);
+                        maxcount++;
+                        seatrender02();
+                    }else{
+
+                    }
+                }          
+            }else{ 
+                alert("더 이상 선택할 수 없습니다.1");
+            }     
+            }              
+            
+
+        function oddrender(){ //짝수 좌석 비활성화된 좌석 그리는 메소드
+            let result = `</div><table class="seattable">`;
+            let resulteng = `<div class="eng">`;
+                for(let i=0; i<arryeng.length; i++){
+                    resulteng+=`<div>${arryeng[i]}</div>`;
+                }
+                
+                for(let i=0; i<arry.length; i++){
+                    result +=`<tr class="table-number">`;
+                    for(let j=0; j<arry[i].length; j++){        
+                        arry[i][j]=i+1;
+                        if((adultcount+precount)==1){
+                            if((i%2)==0){
+                                result+=`<td class="seatnum" onclick="choicerender(${i},${j})">${arry[i][j]}`;
+                            }else{
+                                result+=`<td class="seatodd" onclick="choicerender(${i},${j})">${arry[i][j]}`;
+                            }
+                        }else{
+                            result+=`<td class="seatnum" onclick="choicerender(${i},${j})">${arry[i][j]}`;
+                        }     
+                    }   
+                }
+                seatwrap.innerHTML = `${resulteng}${result}</td></tr>`;  
+                if((adultcount+precount)==0){
+                        render();
+                }
+                let select = document.querySelectorAll('.seatnum');
+                select.forEach((item)=>{
+                item.addEventListener('click',()=>{
+                item.classList.toggle('active');
+            })
+        })     
+        }
+        
+        function adultplus(){ // 성인숫자 늘리는 메소드
+            if(adultcount+precount<8){
+                adultcount++;
+                adult.innerText=adultcount;
+                oddrender();
+            }else{
+                alert("8명까지만 선택가능")
+            }
+        }
+
+        function adultminus(){ // 성인숫자 줄이는 메소드
+            if(adultcount>0){
+                adultcount--;
+                adult.innerText=adultcount;
+                oddrender();
+            }else{
+                alert("불가능")
+            }
+        }
+
+        function preplus(){ // 우대인원 숫자 늘리는 메소드 
+           if(adultcount+precount<8){
+                precount++;
+                pre.innerText=precount;
+                oddrender();
+            }else{
+                alert("8명까지만 선택가능")
+            }
+        }
+
+        function preminus(){ // 우대인원 숫자 줄이는 메소드
+            if(precount>0){
+                precount--;
+                pre.innerText=precount;
+                oddrender();
+            }else{
+                alert("불가능")
+            }
+        }
+
+        function oddnum(){ //홀수인원 선택시 짝수인원 자리 비활성화되는 메소드
 
         }
-    </script>
+
+
+
+
+        
+        
+        </script>
 </body>
 </html>

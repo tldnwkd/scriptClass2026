@@ -60,6 +60,13 @@
             item.addEventListener('mouseleave',() =>{
                 item.classList.remove('active');
             })
+
+            // 토글(Toggle)은 스위치처럼 하나의 버튼이나 동작으로 두 가지 상태를 번갈아 전환하는 것
+            // item 요소에 'active'라는 클래스가 없으면  추가
+            // .item 요소에 'active'라는 클래스가 이미 있으면 제거
+            item.addEventListener('click',()=>{
+                item.classList.toggle('active');
+            })
         })
         // for(let i=0; i<menuList.length; i++){
         //     menuList[i].addEventListener('click',()=>{

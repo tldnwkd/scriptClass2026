@@ -21,11 +21,18 @@
     width: 75%;
     margin-right: 15px;
 }
+.seatcontainer-first{
+    border: 1px solid lightgray;
+    padding-bottom: 60px;
+    border-radius: 1px;
+}
 .infocontainer{
     width: 25%;
     background-color: rgb(49, 49, 49);
     color: white;
     border-radius: 10px;
+    height: 100%;
+    /* height: fit-content; */
 }
 h2{
     position: absolute;
@@ -61,6 +68,7 @@ h3{
 .seatcontainer-child02 div button{
     border: 1px solid lightgray;
     background-color: white;
+    cursor: pointer;
 }
 .seatcontainer-child02 div #adultminus,
 .seatcontainer-child02 div #preminus{
@@ -76,7 +84,7 @@ h3{
 }
 .seatcontainer-child02 div #adult,
 .seatcontainer-child02 div #pre{
- width: 40px;
+    width: 40px;
 }
 .movie-info{
     display: flex;
@@ -179,4 +187,108 @@ h3{
 .next{
     background-color: lightgray;
     border-bottom-right-radius: 5px;
+}
+.table-number{
+    /* border: 1px solid lightblue; */
+    text-align: center;
+    /* margin: 0 5px; */
+    height: 190px;
+}
+
+.table-number td{
+    display: flex;
+    /* border: 1px solid red; */
+    /* margin: 2px 0; */
+    /* width: 15px; */
+    /* height: 20px; */
+    /* margin: 5px 0; */
+    /* justify-content: space-between; */
+}
+.eng{
+    display: flex;
+    /* border: 1px solid red;  */
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-top: 8px;
+    height: 190px;
+    cursor: pointer;
+}
+
+#seatwrap{
+    width: 50%;
+    display: flex;
+    justify-self: center;
+    /* justify-content: space-between; */
+}
+h4{
+    text-align: center;
+    margin: 15px 0;
+}
+.seattable{
+    display: flex;
+    width: 90%;
+    /* border: 1px solid red; */
+    justify-content: center;
+    margin-top: 3px;
+}
+.seattable tr{
+    width: 8%;
+    height: 195px;
+    /* border: 1px solid red; */
+    text-align: center;
+    margin-top: 5px;
+}
+.seattable tr td{
+    display: flex;
+    justify-content: center;
+    border: 1px solid lightskyblue;
+    color: white;
+    font-size: 12px;
+    height: 9%;
+    margin: 1.5px 0;
+    cursor: pointer;
+    line-height: 12px;
+}
+tbody{
+    width: 300px;
+    display: flex;
+    justify-content: center;
+}
+.seatchild{
+    width: 80%;
+    justify-self: center;
+    height: 120px;
+    display: flex;
+}
+.seatchild ul{
+    width: 100%;
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-between;
+}
+
+.seatchild ul li{
+    border: 1px solid gray;
+    width: 90%;
+    height: 28px;
+    margin-bottom: 3px;
+    line-height: 28px;
+}
+.seatnum.complete{
+    background-color: purple;
+    border-top-right-radius: 5px; 
+}
+.seatodd{
+    background-color: lightgray;
+}
+.seatnum{
+    background-color: gray;
+}
+.seatresult{
+    background-color: purple;
+}
+.active{
+    background-color: blueviolet;
 }
