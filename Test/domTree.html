@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom Tree</title>
+    <style>
+        img{
+            width: 150px;
+        }
+        .active{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <!-- 1)문서 객체 모델(DOM, document Object Model)
+        xml,HTML 문서에 접근하기 위한 일종의 인터페이스이다. 
+    -->
+    <h1>제목</h1>
+    <p>본문</p>
+    <h2 id="title">Hello</h2>
+    <!-- 1)요소노드(Element) : h2 
+         2)속성노드 : id="title"
+         3)텍스느노드 : "Hello" 
+    -->
+    <p id="test01">test01</p>
+    <p class="test02">test02</p>
+    <p class="test02">test03</p>
+    <p class="test04"><span class="spanTest04">test04</span></p>
+    <h1 id="title02">안녕하세요</h1>
+    <img src="" alt="커피" id="imgs">
+
+    <ul id="list">
+        <li>기존항목</li>
+        <li>삭제할 항목</li>
+    </ul>
+    
+    <p id="p1">This is a paragraph</p>
+    <input type="button" onclick="changeStyle()" value="눌러보세요"/>
+
+
+    <script>
+        //요소노드 : getElementById(), getElementsByclassName()[순서]
+        //           getElementsByTagName("태그명")[순서]
+        let elementNodo01 = document.getElementById('test01');
+        let elementNodo02 = document.getElementsByClassName('test02')[0];
+        let elementNodo03 = document.getElementsByTagName('p')[1];
+
+        console.log('요소노드01',elementNodo01);
+        console.log('요소노드02',elementNodo02);
+        console.log('요소노드03',elementNodo03);
+
+        // querSelector(), querSelectorAll() 메소드도 마찬가지로 요소노드 선택하지만
+        // css 선택자 문법을 사용할 수 있어 더 유연하고 세밀하다.
+        let elemen04 = document.querySelector('.test04 .spanTest04');
+        console.log('querySelector',elemen04);
+
+        // DOM의 속성 노드 접근하기
+        // innerHtml , innerText, textContent , .getAttribute , setAttribute()등을 사용
+        // getAttribute(“속성이름”) => 속성이름에 해당하는 요소를 조회
+        // setAttribute(“속성이름”,”속성값”) => 속성이름에 해당하는 속성값을 변경
+        let elemen05 = document.querySelector('.test04');
+        elemen05.setAttribute('id','#stest04');
+        console.log('setA~',elemen05);
+
+        // id 속성값만 가져오기 또는 조회하기
+        let idValue = elemen05.getAttribute('id');
+        console.log('getA~',idValue);
+
+        let img = document.querySelector('#imgs');
+        img.setAttribute('src','/images/coffee-gray.jpg');
+
+        // 요소생성, 요소추가, 요소삭제하는 메소드
+        // 요소생성 : document.createElement('생성할 요소');
+        //            새로 생성한 HTML 태그(요소)를 메모리 상에만 생성한다.
+        // 요소추가 : appendChild(추가할 요소);
+        //            만들어둔 또는 생성해둔 태그(요소)객체를 지정한 부모요소의 맨 마지막 자식으로 붙는다.
+        // 요소삭제 : removeChild(삭제할 노드 명);
+        //            해당요소를 DOM트리의 부모 요소로부터 직접 삭제하는 메소드
+        // let list = document.getElementById('list');
+        // let newLi = document.createElement('li');
+        // newLi.innerText = '새항목01';
+
+        // list라는 ul의 부모의 자식요소로 newLi를 추가하겠다.
+        list.appendChild(newLi);
+        // list라는 ul의 부모의 item 자식요소를 삭제하겠다.
+        document.getElementById('item').remove();
+        // function changeStyle(){
+        //     document.getElementById('p1').style.color ='red';
+        //     document.getElementById('p1').style.fontStyle ='italic';
+        // }
+        function changeStyle(){
+            document.getElementById('p1').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

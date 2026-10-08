@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습문제3</title>
+    <style>
+        *{
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        ul{
+            list-style: none;
+        }
+        h1{
+            padding: 30px;
+            padding-bottom: 10px;
+        }
+        .container{
+            display: flex;
+            width: 600px;
+            padding: 30px;
+            justify-content: space-between;
+        }
+        .mainimg{
+            width: 230px;
+            height: 200px;
+            margin-bottom: 20px;
+        }
+        .img-child2{
+            display: flex;
+            width: 230px;
+            justify-content: space-between;
+        }
+        
+        .img1,.img2,.img3{
+            width: 66px;
+            height: 66px;   
+        }
+        img{
+            width: 66px;
+            height: 66px;
+            cursor: pointer;
+        }
+        .info-con{
+            width: 50%;
+        }
+        .img-con{
+            width: 50%;
+        }
+        .info-child li button{
+            width: 100%;
+            padding: 10px 0;
+            border-radius: 5px;
+            border: 1px solid black;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+        .info-child li{
+            margin-bottom: 5px;
+        }
+        .price{
+            color: purple;
+            font-weight: 600;
+        }
+        a{
+            text-decoration: none;
+        }
+        .info-wrap.active{
+            opacity: 1;
+        }
+        .info-wrap{
+            margin-left: 30px;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>에티오피아게뎁</h1>
+    <div class="container">
+        <div class="img-con">
+            <div class="img-child1"><img class="mainimg" src="/images/coffee-pink.jpg" alt="핑크"></div>
+            <div class="img-child2">
+                <div class="img1"><img class="images" src="/images/coffee-pink.jpg" alt="핑크"></div>
+                <div class="img1"><img class="images" src="/images/coffee-blue.jpg" alt="블루"></div>
+                <div class="img1"><img class="images" src="/images/coffee-gray.jpg" alt="그레이"></div>
+            </div>
+        </div>
+        <div class="info-con">
+            <ul class="info-child">
+                <li>상품명 : 에디오피아 게뎁</li>    
+                <li><span class="price">판매가 : 9,000원</span></li>    
+                <li>배송비 : 3,000원</li>    
+                <li>(50,000원 이상 구매 시 무료)</li>    
+                <li>적립금 : 180원(2%)</li>    
+                <li>로스팅 : 2019.06.17</li>    
+                <li><button type="button">장바구니 담기</button></li>    
+                <li><a href="#" class="info">상세 설명 보기</a></li>    
+            </ul>
+        </div>
+    </div>
+    <div class="info-wrap">
+            <ul>
+                <li>원산지 : 에디오피아</li>
+                <li>지역 : 이르가체프 코체레</li>
+                <li>농장 : 게뎁</li>
+                <li>고도 : 1,950~2,000m</li>
+                <li>품종 : 지역 토착종</li>
+                <li>가공법 : 워시드</li>
+            </ul>
+            <h4>information</h4>
+            <pre>
+
+2차 세계대전 이후 설립된 게뎁 농장은 유기농 인증 농장으로 여성의 고용 창출과 지역사회 발전에 기여
+하며 3대째 이어져 내려오는 오랜 역사를 가진 농장입니다. 게뎁 농장은 SCAA 인증을 받은 커피 품질관리
+실험실을 갖추고 있어 철저한 관리를 통해 스페셜티 커피를 생산합니다.
+            </pre>
+            <h4>Flavor Note</h4>
+            <p>은은하고 다채로운 꽃향,망고,다크체리,달달함이 입안 가득.</p>
+        </div>
+    <script>
+        let img = document.querySelectorAll('.img1 .images');
+        let info = document.querySelector('.info');
+        let infowrap = document.querySelector('.info-wrap');
+        
+        // 태그 접근
+        let mainimg = document.querySelector('.mainimg');
+
+        
+
+        for(let i=0; i<img.length; i++){
+            img[i].addEventListener('mouseenter',()=>{
+                let getimg = img[i].getAttribute('src');
+                // 태그의 속성 접근
+                mainimg.setAttribute('src',getimg);
+            })
+        }
+
+        info.addEventListener('click',()=>{
+            infowrap.classList.toggle('active');
+        });
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoList 연습문제</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .todo-container{
+            width: 400px;
+            margin: 0 auto;
+        }
+        li{
+            display: flex;
+            justify-content: space-between;
+            width: 200px;
+        }
+        ul{
+            list-style: none;
+        }
+        span{
+            color: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-container">
+        <h1>할 일 목록</h1>
+        <div class="input-area">
+            <input id="task" type="text" placeholder="할 일 입력" />
+            <button onclick="addTask()">추가</button>
+        </div>
+        <ul id="tasks"></ul>
+    </div>
+
+    <script>
+        let count =0;
+        function addTask(){
+            let list = document.getElementById('tasks');
+            let task = document.getElementById('task').value;
+            let newLi = document.createElement('li');
+            list.appendChild(newLi);        
+            let getli = document.getElementById('set');         
+            newLi.innerHTML =`${task}<span onclick="removetask()">x</sapn>`;            
+        }
+
+        function removetask(){         
+            document.querySelector('li').remove();
+        }
+    </script>
+</body>
+</html>
