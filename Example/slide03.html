@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>왼쪽 슬라이드 메뉴</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+        ul{
+            list-style: none;
+            margin: 50px 15px;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+        #menuBtn{
+            width: 30px;
+            height: 30px;
+            background-color: black;
+            color:  white;
+            border-radius: 5px;
+        }
+        
+        #menuBtn{
+            position: absolute;
+            left: 10px;
+            top: 15px;
+            z-index: 10;
+        }
+        h1{
+            padding-top: 5px;
+            margin: 0 auto;
+            margin-left: 50px; 
+        }
+        body{
+            height: 100vh;
+        }
+        h1.active{
+           padding-top: 5px;
+           margin: 0 auto;
+           margin-left: 210px; 
+        }
+        .menu-wrap.active{  
+            position: fixed;
+            left: 0;
+            top: 0;   
+            width: 200px;
+            height: inherit;
+            background-color: gray;
+            color: white;
+            z-index: 1;
+        }
+        .menu-wrap{
+            position: fixed;
+            left: -200px;
+            top:0;
+        }
+        ul li{
+            padding-top: 20px;
+        }
+        .active{
+            transition: 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>DOM 실습 - 왼쪽 슬라이드 메뉴</h1>
+    <button id="menuBtn">&#x2630;</button>
+    <nav id="menu" class="menu-wrap">
+        <ul>
+            <li><a href="#">홈</a></li>
+            <li><a href="#">서비스</a></li>
+            <li><a href="#">문의</a></li>
+            <li><a href="#">연락처</a></li>
+            <li><a href="#">소개</a></li>
+        </ul>
+    </nav>
+
+    <script>
+        let menuBtn = document.getElementById('menuBtn');
+        let menuwrap = document.querySelector('body .menu-wrap');
+        let menu = document.getElementById('menu');
+        let h1 = document.querySelector('h1');
+
+        menuBtn.addEventListener('click',()=>{
+            menuwrap.classList.toggle('active');
+            menuBtn.classList.toggle('acrive');
+            h1.classList.toggle('active');
+        })
+
+    </script>
+</body>
+
+</html>

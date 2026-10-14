@@ -12,7 +12,8 @@
             <div>
                 <h2>원하시는 음료를 선택해 주세요</h2>
                 <p>please choose the drink you want</p>
-                <button class="menu">menu</button>
+                <button class="btn">COFFEE</button>
+                <button class="btn">DRINK</button>
             </div>
             <ul id="menu"></ul>
         </div>
@@ -30,36 +31,74 @@
         let menu =document.getElementById('menu');
         let orderitem =document.getElementById('orderitem');
         let totalorder = document.getElementById('totalorder');
+        let btn = document.querySelectorAll('div .btn');
         let menus = [
-            { id: 0, name: '아메리카노', type: 'HOT', price: 1000,quantity:1 },
-            { id: 1, name: '아메리카노', type: 'ICE', price: 1300,quantity:1 },
-            { id: 2, name: '바닐라라떼', type: 'HOT', price: 2500,quantity:1 },
-            { id: 3, name: '바닐라라떼', type: 'ICE', price: 2800,quantity:1 },
-            { id: 4, name: '연유라떼', type: 'HOT', price: 2500,quantity:1 },
-            { id: 5, name: '연유라떼', type: 'ICE', price: 2800,quantity:1 },
-            { id: 6, name: '카라멜마끼아또', type: 'HOT', price: 2800,quantity:1 },
-            { id: 7, name: '카라멜마끼아또', type: 'ICE', price: 3000,quantity:1 },
-            { id: 8, name: '카페모카', type: 'HOT', price: 3000,quantity:1 },
-            { id: 9, name: '카페모카', type: 'ICE', price: 3300,quantity:1 },
-            { id: 10, name: '딥카페라테', type: 'HOT', price: 3400,quantity:1 },
-            { id: 11, name: '딥카페라테', type: 'ICE', price: 3700,quantity:1 },
+            { id: 0, name: '아메리카노', type: 'HOT', price: 1000,quantity:1 ,category:1},
+            { id: 1, name: '아메리카노', type: 'ICE', price: 1300,quantity:1 ,category:1},
+            { id: 2, name: '바닐라라떼', type: 'HOT', price: 2500,quantity:1 ,category:1},
+            { id: 3, name: '바닐라라떼', type: 'ICE', price: 2800,quantity:1 ,category:1},
+            { id: 4, name: '연유라떼', type: 'HOT', price: 2500,quantity:1 ,category:1},
+            { id: 5, name: '연유라떼', type: 'ICE', price: 2800,quantity:1 ,category:1},
+            { id: 6, name: '카라멜마끼아또', type: 'HOT', price: 2800,quantity:1 ,category:1},
+            { id: 7, name: '카라멜마끼아또', type: 'ICE', price: 3000,quantity:1 ,category:1},
+            { id: 8, name: '카페모카', type: 'HOT', price: 3000,quantity:1 ,category:1},
+            { id: 9, name: '카페모카', type: 'ICE', price: 3300,quantity:1 ,category:1},
+            { id: 10, name: '아이스티', type: 'ICE', price: 3400,quantity:1 ,category:2},
+            { id: 11, name: '딸기스무디', type: 'ICE', price: 3700,quantity:1 ,category:2},
+            { id: 12, name: '망고스무디', type: 'ICE', price: 3700,quantity:1 ,category:2},
+            { id: 13, name: '멜론스무디', type: 'ICE', price: 3700,quantity:1 ,category:2},
+            { id: 14, name: '레몬티', type: 'ICE', price: 3700,quantity:1 ,category:2},
+            { id: 15, name: '레몬티', type: 'HOT', price: 3700,quantity:1 ,category:2},
+            { id: 16, name: '딸기에이드', type: 'ICE', price: 3700,quantity:1 ,category:2},
+            { id: 17, name: '딸기에이드', type: 'HOT', price: 3700,quantity:1 ,category:2},
+            { id: 18, name: '망고에이드', type: 'ICE', price: 3700,quantity:1 ,category:2},
+            { id: 19, name: '망고에이드', type: 'HOT', price: 3700,quantity:1 ,category:2}
             ];
         let cart = [];
 
-        function render(){
-             let result ='';
-            for(let i=0; i<menus.length; i++){
+        function render(cateNum){
+            let filterMenu = menus.filter((item)=>{
+                return item.category === cateNum;
+            });
+            let result ='';
+            for(let i=0; i<filterMenu.length; i++){
+                if(cateNum==1){
                 result+= `<li class="product" onclick="add(${i})">
-                    <img src="/images/${i}.png" alt="${menus[i].type}${menus[i].name}">
-                    <div class="menu-temp">${menus[i].type}</div>
-                    <div class="menu-name">${menus[i].name}</div>
-                    <div class="menu-price">${menus[i].price}</div></li>`;
+                    <img src="/images/${i}.png" alt="${filterMenu[i].type}${filterMenu[i].name}">
+                    <div class="menu-temp">${filterMenu[i].type}</div>
+                    <div class="menu-name">${filterMenu[i].name}</div>
+                    <div class="menu-price">${filterMenu[i].price}</div></li>`;
+                }else{
+                    result+= `<li class="product" onclick="add(${i})">
+                    <img src="/images/d-${i}.png" alt="${filterMenu[i].type}${filterMenu[i].name}">
+                    <div class="menu-temp">${filterMenu[i].type}</div>
+                    <div class="menu-name">${filterMenu[i].name}</div>
+                    <div class="menu-price">${filterMenu[i].price}</div></li>`;
+                }
             }
                     menu.innerHTML = `${result}`;           
         }           
-        render();
-                
+        render(1);
+        let product = document.querySelectorAll('#menu .product');
+
+        for(let i=0; i<btn.length; i++){
+            btn[i].addEventListener('click',()=>{
+                let cateIndex = i+1;
+                return render(cateIndex);
+            })
+        }
+        for(let i=0; i<product.length; i++){
+            btn[i].addEventListener('click',()=>{
+                let cateIndex = i+1;
+                return render(cateIndex);
+            })
+        }
+
+        
         function add(index){
+            // let filterMenu = menus.filter((item)=>{
+            //     return item.category === cateNum;
+            // });
             let chk = -1;
             for(let i=0; i<cart.length; i++){
                 if(cart[i].id==menus[index].id){
@@ -77,7 +116,7 @@
             let resultorder =''; 
             let totalprice =0;   
             let totalquantity =0;   
-            for(let i=0; i<cart.length; i++){
+            for(let i=0; i<filterMenu.length; i++){
                 resultorder += `<li><div class="iteminfo">${i+1}. ${cart[i].name} (${cart[i].type}) ${cart[i].quantity}개 <br>${cart[i].price*cart[i].quantity}원</div>
                 <div class="buttonbox"><button onclick="plus(${i})">+</button>
                 <button onclick="minus(${i})">-</button>
@@ -104,14 +143,20 @@
         }
 
         function deleteitem(index){
-            cart.splice(index,1);
-            resultorder ="";     
-            rendercart(); 
+            let deletechk= confirm('선택항목을 삭제하시겠습니까?');
+            if(deletechk){
+                cart.splice(index,1);
+                resultorder ="";     
+            }
+            rendercart();
         }
 
         function deleteall(){
-            cart.splice(0,cart.length);
-            resultorder ="";     
+            let deletechk= confirm('선택항목을 전부 삭제하시겠습니까?');
+            if(deletechk){
+                cart.splice(0,cart.length);
+                resultorder ="";     
+            }               
             rendercart(); 
         } 
     </script>

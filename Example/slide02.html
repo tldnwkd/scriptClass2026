@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>슬라이드 메뉴 만들기</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        ul {
+            list-style: none;
+            width: 200px;
+            margin-left: 13px;
+            margin-top: 15px;
+            position: absolute;
+        }
+        ul li{
+            margin: 8px;
+        }
+        ul li a{
+            text-decoration: none;
+            color: black;
+        }
+        ul li a:hover{
+            font-weight: bold;
+        }
+        .dropdown{
+            margin: 100px auto;
+            width: 600px;
+            position: relative;
+        }
+
+        #dropdownMenu{
+            border: 1px solid lightgray;
+            border-radius: 5px; 
+            box-shadow: 0 2px 2px rgba(168, 168, 168, 0.3);
+        }
+
+        .dropdown-menu{
+            display: none;
+        }
+        .arrow.arrow02{
+            transform: rotate(180deg);
+        }
+        .dropdown-btn{
+            position: relative;
+            width: 80px;
+            border: none;
+            background-color: white;
+            font-weight: bold;
+        }
+        .arrow{
+            position: absolute;
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dropdown">
+        <button class="dropdown-btn" id="dropdownBtn">
+            고객센터 <span class="arrow">▼</span>
+        </button>
+        <ul class="dropdown-menu" id="dropdownMenu">
+            <li><a href="">공지사항</a></li>
+            <li><a href="">뉴스/이벤트</a></li>
+            <li><a href="">상품 리뷰</a></li>
+            <li><a href="">상품 문의</a></li>
+            <li><a href="">대량구매/도매문의</a></li>
+            <li><a href="">기타문의</a></li>
+        </ul>
+    </div>
+    <script>
+        let dropdownBtn = document.getElementById('dropdownBtn');
+        let menuselect = document.getElementById('dropdownMenu');
+        let arrow = document.querySelector('.arrow');
+
+        dropdownBtn.addEventListener('click', () => {
+            menuselect.classList.toggle("dropdown-menu");
+            arrow.classList.toggle("arrow02");
+        })
+    </script>
+</body>
+
+</html>

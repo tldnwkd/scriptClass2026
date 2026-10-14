@@ -247,7 +247,7 @@
             background-color: #ffcdd2;
         }
 
-        .menu{
+        .btn{
             font-weight: bold;
             margin: 15px 0;
             width: 80px;
@@ -257,7 +257,7 @@
             background-color: rgb(238, 184, 11);
             cursor: pointer;
         }
-        .menu:hover{
+        .btn:hover{
             background-color: black;
             color: white;
         }

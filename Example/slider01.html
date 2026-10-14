@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>슬라이드 이미지</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+        body{
+            background-color: #f5f5f5;
+        }
+        .slider-wrap{
+            position: relative;
+            width: 600px;
+            height: 350px;
+            margin: 100px auto;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        .slider-wrap img{
+            width: 100%;
+            height: 100%;
+        }
+        .slider-wrap .btns{
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .slider-wrap .btns span{
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+        }
+        .slider-wrap .btns span.active{
+            background-color: dodgerblue;
+            /* transform: scale(1.3) => 크기가 1.3배 확대 */
+            transform: scale(1.3);
+        }
+        .slider-wrap .control{
+            position: absolute;
+            right: 10px;
+            top:  10px;
+            background-color: rgba(255,255,255,0.8);
+            padding: 6px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            /* user-select:none => 웹페이지 글자나 텍스트를 마우스로 드래그하여 선택하지 못하도록 방지하는 기능*/
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider-wrap">
+        <div class="slider">
+            <img id="photo" src="/images/pic_1.jpg" alt="슬라이드 이미지" />
+        </div>
+        <div class="btns">
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="control" id="togglebtn">&#x23F8; 정지</div>
+    </div>
+
+    <script>
+        let photo = document.getElementById('photo');
+        let btns = document.querySelectorAll('.btns span');
+        let togglebtn = document.getElementById("togglebtn");
+
+        // 현재 보여주는 슬라이드 번호 초기화
+        let currentIndex = 0;
+        // span의 개수를 초기화
+        let spantotal = btns.length;
+        // 현재 슬라이드가 재생중인지, 정지상태인지 상태를 확인하는 변수
+        let isPlay = true; //true면 현재 재생중인 상태
+        // setInterval()함수 적용하는 변수
+        let timer;
+
+        // 슬라이드 실행 함수 showslid() 생성
+        function showslid(index){
+            photo.src=`/images/pic_${index+1}.jpg`;
+            for(let i=0; i<spantotal; i++){
+                btns[i].classList.remove('active');
+            }
+            //인덱스에 해당하는 span에 active가 추가된다.
+            btns[index].classList.add('active');
+        }
+        function startSlide(){
+            timer = setInterval(()=>{
+                showslid(currentIndex);
+
+                // currentIndex = spantotal % currentIndex+1; => currentIndex = 0,1,2,3,4 
+                // currentIndex = 5 % (0,1,2,3,4)+1 => 4,3,2,1,0;
+                if (currentIndex === (spantotal-1)) {
+                    currentIndex = 0;
+                }else{
+                    currentIndex++;
+                }
+                showslid(currentIndex);
+            },2500)
+        }
+        
+        // 슬라이드 정지 함수
+        function stopSlide(){
+            clearInterval(timer);
+        }
+        // 함수 호출
+        showslid(currentIndex);
+        // 자동재생 시작 간격 2초
+        startSlide();
+
+        togglebtn.addEventListener('click',()=>{
+            if(isPlay === true){
+                stopSlide();
+                togglebtn.innerText="▶ 재생";
+                isPlay = false;
+            }else{
+                startSlide();
+                isPlay = true;
+                togglebtn.innerText = "\u23f8 정지";
+            }
+        })
+    </script>
+</body>
+
+</html>
